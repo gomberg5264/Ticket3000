@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ticket Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket Management Dashboard</h1>
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        <h2>Create New Ticket</h2>
+        <form id="new-ticket-form">
+            <div class="form-group">
+                <label for="new-ticket-title">Title:</label>
+                <input type="text" id="new-ticket-title" required>
+            </div>
+            <button type="submit">Create Ticket</button>
+        </form>
+        <h2>Tickets</h2>
+        <ul id="ticket-list"></ul>
+        <button id="purge-completed">Purge Completed Tickets</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
