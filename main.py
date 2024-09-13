@@ -7,6 +7,10 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+# Ensure ADMIN_USERNAME is set
+if 'ADMIN_USERNAME' not in os.environ:
+    os.environ['ADMIN_USERNAME'] = 'admin'
+
 # Initialize Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(app)
