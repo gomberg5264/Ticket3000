@@ -21,6 +21,22 @@
                 <label for="new-ticket-title">Title:</label>
                 <input type="text" id="new-ticket-title" required>
             </div>
+            <div class="form-group">
+                <label for="new-ticket-category">Category:</label>
+                <select id="new-ticket-category" required>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="new-ticket-priority">Priority:</label>
+                <select id="new-ticket-priority" required>
+                    {% for priority in priority_levels %}
+                    <option value="{{ priority }}">{{ priority }}</option>
+                    {% endfor %}
+                </select>
+            </div>
             <button type="submit">Create Ticket</button>
         </form>
         <h2>Tickets</h2>

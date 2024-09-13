@@ -5,10 +5,13 @@ import os
 
 tickets_bp = Blueprint('tickets', __name__)
 
+CATEGORIES = ['Bug', 'Feature Request', 'Support']
+PRIORITY_LEVELS = ['Low', 'Medium', 'High', 'Critical']
+
 @tickets_bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    return render_template('dashboard.html', categories=CATEGORIES, priority_levels=PRIORITY_LEVELS)
 
 @tickets_bp.route('/api/tickets', methods=['GET', 'POST'])
 @login_required
@@ -21,6 +24,8 @@ def api_tickets():
         tickets = load_tickets()
         new_ticket['id'] = len(tickets) + 1
         new_ticket['status'] = 'pending'
+        new_ticket['category'] = new_ticket.get('category', 'Bug')
+        new_ticket['priority'] = new_ticket.get('priority', 'Medium')
         tickets.append(new_ticket)
         save_tickets(tickets)
         return jsonify(new_ticket), 201
@@ -34,7 +39,8 @@ def api_ticket(ticket_id):
         return jsonify({'error': 'Ticket not found'}), 404
 
     if request.method == 'PUT':
-        ticket['status'] = request.json['status']
+        update_data = request.json
+        ticket.update(update_data)
         save_tickets(tickets)
         return jsonify(ticket)
     elif request.method == 'DELETE':

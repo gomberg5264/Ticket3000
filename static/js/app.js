@@ -16,6 +16,8 @@ async function loadTickets() {
         li.innerHTML = `
             <span>${ticket.title}</span>
             <span>(${ticket.status})</span>
+            <span>Category: ${ticket.category}</span>
+            <span>Priority: ${ticket.priority}</span>
             <button onclick="updateTicketStatus(${ticket.id}, '${ticket.status === 'pending' ? 'completed' : 'pending'}')">${ticket.status === 'pending' ? 'Complete' : 'Reopen'}</button>
             <button onclick="deleteTicket(${ticket.id})">Delete</button>
         `;
@@ -26,15 +28,19 @@ async function loadTickets() {
 async function createTicket(event) {
     event.preventDefault();
     const title = document.getElementById('new-ticket-title').value;
+    const category = document.getElementById('new-ticket-category').value;
+    const priority = document.getElementById('new-ticket-priority').value;
     const response = await fetch('/api/tickets', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ title, category, priority }),
     });
     if (response.ok) {
         document.getElementById('new-ticket-title').value = '';
+        document.getElementById('new-ticket-category').selectedIndex = 0;
+        document.getElementById('new-ticket-priority').selectedIndex = 0;
         loadTickets();
     }
 }
