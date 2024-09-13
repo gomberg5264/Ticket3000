@@ -26,5 +26,9 @@ def index():
         return redirect(url_for('tickets.dashboard'))
     return redirect(url_for('auth.login'))
 
+@app.context_processor
+def inject_user():
+    return dict(user=current_user)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
