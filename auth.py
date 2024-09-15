@@ -106,5 +106,6 @@ def delete_user(user_id):
 # Initialize users.txt if it doesn't exist
 if not os.path.exists('users.txt'):
     admin_username = os.environ.get('ADMIN_USERNAME', 'admin')
+    admin_password = os.environ.get('ADMIN_PASSWORD', 'admin')
     with open('users.txt', 'w') as f:
-        f.write(f"1:{admin_username}:{generate_password_hash('admin')}:True\n")
+        f.write(f"1:{admin_username}:{generate_password_hash(admin_password)}:True\n")
