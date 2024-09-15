@@ -16,9 +16,9 @@ class User(UserMixin):
     def get(user_id):
         with open('users.txt', 'r') as f:
             for line in f:
-                id, username, password, is_admin = line.strip().split(':')
-                if id == user_id:
-                    return User(id, username, password, is_admin == 'True')
+                parts = line.strip().split(':')
+                if parts[0] == user_id:
+                    return User(parts[0], parts[1], ':'.join(parts[2:-1]), parts[-1] == 'True')
         return None
 
     @staticmethod
@@ -26,8 +26,8 @@ class User(UserMixin):
         users = []
         with open('users.txt', 'r') as f:
             for line in f:
-                id, username, password, is_admin = line.strip().split(':')
-                users.append(User(id, username, password, is_admin == 'True'))
+                parts = line.strip().split(':')
+                users.append(User(parts[0], parts[1], ':'.join(parts[2:-1]), parts[-1] == 'True'))
         return users
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
@@ -37,11 +37,13 @@ def login():
         password = request.form['password']
         with open('users.txt', 'r') as f:
             for line in f:
-                id, stored_username, stored_password, is_admin = line.strip().split(':')
-                if username == stored_username and check_password_hash(stored_password, password):
-                    user = User(id, stored_username, stored_password, is_admin == 'True')
-                    login_user(user)
-                    return redirect(url_for('tickets.dashboard'))
+                parts = line.strip().split(':')
+                if username == parts[1]:
+                    stored_password = ':'.join(parts[2:-1])
+                    if check_password_hash(stored_password, password):
+                        user = User(parts[0], parts[1], stored_password, parts[-1] == 'True')
+                        login_user(user)
+                        return redirect(url_for('tickets.dashboard'))
         flash('Invalid username or password')
     return render_template('login.html')
 
@@ -70,10 +72,10 @@ def toggle_admin(user_id):
     users = []
     with open('users.txt', 'r') as f:
         for line in f:
-            id, username, password, is_admin = line.strip().split(':')
-            if int(id) == user_id:
-                is_admin = 'False' if is_admin == 'True' else 'True'
-            users.append(f"{id}:{username}:{password}:{is_admin}\n")
+            parts = line.strip().split(':')
+            if int(parts[0]) == user_id:
+                parts[-1] = 'False' if parts[-1] == 'True' else 'True'
+            users.append(':'.join(parts) + '\n')
 
     with open('users.txt', 'w') as f:
         f.writelines(users)
@@ -91,8 +93,8 @@ def delete_user(user_id):
     users = []
     with open('users.txt', 'r') as f:
         for line in f:
-            id, username, password, is_admin = line.strip().split(':')
-            if int(id) != user_id:
+            parts = line.strip().split(':')
+            if int(parts[0]) != user_id:
                 users.append(line)
 
     with open('users.txt', 'w') as f:
