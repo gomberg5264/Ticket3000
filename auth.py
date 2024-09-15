@@ -51,37 +51,6 @@ def logout():
     logout_user()
     return redirect(url_for('auth.login'))
 
-@auth_bp.route('/register', methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        confirm_password = request.form['confirm_password']
-
-        if password != confirm_password:
-            flash('Passwords do not match')
-            return render_template('register.html')
-
-        with open('users.txt', 'r') as f:
-            users = f.readlines()
-
-        for user in users:
-            if username == user.split(':')[1]:
-                flash('Username already exists')
-                return render_template('register.html')
-
-        new_user_id = str(len(users) + 1)
-        hashed_password = generate_password_hash(password)
-        new_user = f"{new_user_id}:{username}:{hashed_password}:False\n"
-
-        with open('users.txt', 'a') as f:
-            f.write(new_user)
-
-        flash('Registration successful. Please log in.')
-        return redirect(url_for('auth.login'))
-
-    return render_template('register.html')
-
 @auth_bp.route('/admin')
 @login_required
 def admin_dashboard():
