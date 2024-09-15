@@ -1,0 +1,61 @@
+[01:55:06.067] Cloning gomberg5264/ticket3000:main...
+[01:55:06.495] Configuration changed
+[01:55:06.974] Building production image...
+[01:55:12.199] #2 [internal] load .dockerignore
+[01:55:12.233] #2 sha256:121e7c751e2a3b850283673f20131264b67554ce1f069b40d8b164ebbe14c1ca
+[01:55:12.264] #2 transferring context: 2B done
+[01:55:12.268] #2 DONE 0.0s
+[01:55:12.271] #1 [internal] load build definition from Dockerfile
+[01:55:12.276] #1 sha256:89a8719be5b42f3068bbf06bd6c5b77f19197e0e711662999bdacf3fe2fd5d4d
+[01:55:12.279] #1 transferring dockerfile: 690B done
+[01:55:12.282] #1 DONE 0.0s
+[01:55:12.285] #3 [internal] load metadata for docker.io/library/python:3.9-slim
+[01:55:12.288] #3 sha256:3425157df499c84dd49181e5611a11caeed16adf15a5ddbcfa4c3002c56d3d27
+[01:55:12.295] #3 DONE 0.5s
+[01:55:12.298] #4 [1/4] FROM docker.io/library/python:3.9-slim@sha256:2851c06da1fdc3c451784beef8aa31d1a313d8e3fc122e4a1891085a104b7cfb
+[01:55:12.301] #4 sha256:199a37327d91d9c5d15b1b80770602eb58cbde255fe47b4ed054d29ba5c90c7d
+[01:55:12.304] #4 resolve docker.io/library/python:3.9-slim@sha256:2851c06da1fdc3c451784beef8aa31d1a313d8e3fc122e4a1891085a104b7cfb done
+[01:55:12.307] #4 ...
+[01:55:12.313] #6 [internal] load build context
+[01:55:12.316] #6 sha256:554163fa980913805832a426ea8755c870bf0c44540a2f9e82ac29d40a704487
+[01:55:12.319] #6 transferring context: 85.20kB 0.0s done
+[01:55:12.322] #6 DONE 0.0s
+[01:55:12.325] #4 [1/4] FROM docker.io/library/python:3.9-slim@sha256:2851c06da1fdc3c451784beef8aa31d1a313d8e3fc122e4a1891085a104b7cfb
+[01:55:12.330] #4 sha256:199a37327d91d9c5d15b1b80770602eb58cbde255fe47b4ed054d29ba5c90c7d
+[01:55:12.334] #4 sha256:0fa26e0a6c779a41b265beaf4e11ac2899b82fc487fde96e28dec51f08fd831e 0B / 3.51MB 0.1s
+[01:55:12.337] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 0B / 14.74MB 0.1s
+[01:55:12.339] #4 sha256:b665d04ddefb24a5af0c944a98df2ebfb1e3a26e0a546573041f84e0a4a2150e 0B / 251B 0.1s
+[01:55:12.342] #4 sha256:2851c06da1fdc3c451784beef8aa31d1a313d8e3fc122e4a1891085a104b7cfb 10.41kB / 10.41kB done
+[01:55:12.348] #4 sha256:d465e807ab2e72c74ec6fa81d1d2751108c7861a9c041f072e3d24b5aaf91fcb 1.75kB / 1.75kB done
+[01:55:12.358] #4 sha256:397ed8d3163622f16a7ad7f8d235cb365b893a589ce31d79f9d6e61d2a5ae31a 5.22kB / 5.22kB done
+[01:55:12.364] #4 sha256:0fa26e0a6c779a41b265beaf4e11ac2899b82fc487fde96e28dec51f08fd831e 3.51MB / 3.51MB 0.2s done
+[01:55:12.368] #4 sha256:b665d04ddefb24a5af0c944a98df2ebfb1e3a26e0a546573041f84e0a4a2150e 251B / 251B 0.2s done
+[01:55:12.378] #4 extracting sha256:0fa26e0a6c779a41b265beaf4e11ac2899b82fc487fde96e28dec51f08fd831e
+[01:55:12.384] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 1.05MB / 14.74MB 0.4s
+[01:55:12.388] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 4.19MB / 14.74MB 0.5s
+[01:55:12.391] #4 extracting sha256:0fa26e0a6c779a41b265beaf4e11ac2899b82fc487fde96e28dec51f08fd831e 0.2s done
+[01:55:12.393] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 8.39MB / 14.74MB 0.7s
+[01:55:12.398] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 11.53MB / 14.74MB 0.8s
+[01:55:12.401] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 13.63MB / 14.74MB 0.9s
+[01:55:12.406] #4 extracting sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919
+[01:55:12.409] #4 sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 14.74MB / 14.74MB 0.9s done
+[01:55:12.412] #4 extracting sha256:a657783e238bbb29a690f2f314f9eb40a7bf9ab06f795e95590adf1f86413919 0.6s done
+[01:55:12.414] #4 extracting sha256:b665d04ddefb24a5af0c944a98df2ebfb1e3a26e0a546573041f84e0a4a2150e done
+[01:55:12.416] #4 DONE 1.6s
+[01:55:12.420] #5 [2/4] WORKDIR /app
+[01:55:12.423] #5 sha256:a01ed3784d898b4fcc9bc68c7d7ea984293c81c7dcf298bc0e544b1ddd9b3b8d
+[01:55:12.426] #5 DONE 0.1s
+[01:55:12.430] #7 [3/4] COPY . /app
+[01:55:12.432] #7 sha256:1afac309f44f55414baf94d7c09bf2ae387f3a6fa5de33647ec42f6aa4c67e1d
+[01:55:12.436] #7 DONE 0.0s
+[01:55:12.439] #8 [4/4] RUN pip install --no-cache-dir -r requirements.txt
+[01:55:12.443] #8 sha256:6467a3b1e6a40b1db3b26f9fd473add5d048052de38b5b4f40e49693880d6ddf
+[01:55:12.447] #8 2.548 ERROR: Could not open requirements file: [Errno 2] No such file or directory: 'requirements.txt'
+[01:55:12.449] #8 2.734
+[01:55:12.452] #8 2.734 [notice] A new release of pip is available: 23.0.1 -> 24.2
+[01:55:12.454] #8 2.734 [notice] To update, run: pip install --upgrade pip
+[01:55:12.458] #8 ERROR: process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
+[01:55:12.460] ------
+[01:55:12.463] > [4/4] RUN pip install --no-cache-dir -r requirements.txt:
+[01:55:12.466] ------
+[01:55:12.468] process "/bin/sh -c pip install --no-cache-dir -r requirements.txt" did not complete successfully: exit code: 1
