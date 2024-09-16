@@ -55,7 +55,7 @@ def login():
                         stored_password = ':'.join(parts[2:-1])
                         if check_password_hash(stored_password, password):
                             user = User(parts[0], parts[1], stored_password, parts[-1] == 'True')
-                            login_user(user)
+                            login_user(user, remember=True)  # Set remember=True
                             logger.info(f"User {username} logged in successfully")
                             return redirect(url_for('tickets.dashboard'))
             logger.warning(f"Invalid login attempt for username: {username}")
@@ -135,12 +135,12 @@ def create_admin_account():
     admin_username = os.environ.get('ADMIN_USERNAME')
     admin_password = os.environ.get('ADMIN_PASSWORD')
     
-    logger.info(f"Attempting to create admin account with username: {admin_username}")
-    logger.debug(f"ADMIN_USERNAME environment variable: {admin_username}")
-    logger.debug(f"ADMIN_PASSWORD environment variable: {'Set' if admin_password else 'Not set'}")
+    print(f"Attempting to create admin account with username: {admin_username}")
+    print(f"ADMIN_USERNAME environment variable: {admin_username}")
+    print(f"ADMIN_PASSWORD environment variable: {'Set' if admin_password else 'Not set'}")
 
     if not admin_username or not admin_password:
-        logger.error("ADMIN_USERNAME or ADMIN_PASSWORD environment variable is not set. Skipping admin account creation.")
+        print("ADMIN_USERNAME or ADMIN_PASSWORD environment variable is not set. Skipping admin account creation.")
         return
 
     try:
@@ -150,7 +150,7 @@ def create_admin_account():
                 for line in f:
                     parts = line.strip().split(':')
                     if parts[1] == admin_username:
-                        logger.info(f"Admin account with username '{admin_username}' already exists.")
+                        print(f"Admin account with username '{admin_username}' already exists.")
                         return
 
         # If admin account doesn't exist, create it
@@ -158,9 +158,9 @@ def create_admin_account():
             hashed_password = generate_password_hash(admin_password)
             user_id = str(len(User.get_all_users()) + 1)  # Generate a unique user ID
             f.write(f"{user_id}:{admin_username}:{hashed_password}:True\n")
-        logger.info(f"Admin account created successfully with username: {admin_username}")
+        print(f"Admin account created successfully with username: {admin_username}")
     except IOError as e:
-        logger.error(f"Error creating admin account: {e}")
+        print(f"Error creating admin account: {e}")
 
 # Initialize admin account when the module is imported
 create_admin_account()
@@ -169,14 +169,16 @@ create_admin_account()
 try:
     with open('users.txt', 'r') as f:
         users_content = f.read()
-        logger.debug(f"Contents of users.txt:\n{users_content}")
+        print(f"Contents of users.txt:\n{users_content}")
 except IOError as e:
-    logger.error(f"Error reading users.txt: {e}")
+    print(f"Error reading users.txt: {e}")
 
 # Log all environment variables
-logger.debug("All environment variables:")
+print("All environment variables:")
 for key, value in os.environ.items():
     if key in ['ADMIN_USERNAME', 'ADMIN_PASSWORD']:
-        logger.debug(f"{key}: {'Set' if value else 'Not set'}")
+        print(f"{key}: {'Set' if value else 'Not set'}")
     else:
-        logger.debug(f"{key}: {value}")
+        print(f"{key}: {value}")
+
+print("Auth module initialized and admin account creation attempted.")
