@@ -132,12 +132,16 @@ def delete_user(user_id):
     return redirect(url_for('auth.admin_dashboard'))
 
 def create_admin_account():
-    admin_username = os.environ.get('ADMIN_USERNAME', 'admin')
-    admin_password = os.environ.get('ADMIN_PASSWORD', 'change_me_immediately')
+    admin_username = os.environ.get('ADMIN_USERNAME')
+    admin_password = os.environ.get('ADMIN_PASSWORD')
     
     logger.info(f"Attempting to create admin account with username: {admin_username}")
-    logger.debug(f"ADMIN_USERNAME environment variable: {os.environ.get('ADMIN_USERNAME', 'Not set')}")
-    logger.debug(f"ADMIN_PASSWORD environment variable: {'Set' if os.environ.get('ADMIN_PASSWORD') else 'Not set'}")
+    logger.debug(f"ADMIN_USERNAME environment variable: {admin_username}")
+    logger.debug(f"ADMIN_PASSWORD environment variable: {'Set' if admin_password else 'Not set'}")
+
+    if not admin_username or not admin_password:
+        logger.error("ADMIN_USERNAME or ADMIN_PASSWORD environment variable is not set. Skipping admin account creation.")
+        return
 
     try:
         # Check if users.txt exists and if admin account already exists
@@ -146,13 +150,14 @@ def create_admin_account():
                 for line in f:
                     parts = line.strip().split(':')
                     if parts[1] == admin_username:
-                        logger.info("Admin account already exists.")
+                        logger.info(f"Admin account with username '{admin_username}' already exists.")
                         return
 
         # If admin account doesn't exist, create it
         with open('users.txt', 'a') as f:
             hashed_password = generate_password_hash(admin_password)
-            f.write(f"1:{admin_username}:{hashed_password}:True\n")
+            user_id = str(len(User.get_all_users()) + 1)  # Generate a unique user ID
+            f.write(f"{user_id}:{admin_username}:{hashed_password}:True\n")
         logger.info(f"Admin account created successfully with username: {admin_username}")
     except IOError as e:
         logger.error(f"Error creating admin account: {e}")

@@ -1,5 +1,6 @@
 # Gunicorn configuration file
 import multiprocessing
+from main import initialize_app
 
 # Binding
 bind = "0.0.0.0:5000"
@@ -30,3 +31,7 @@ loglevel = "debug"
 
 # Application module
 wsgi_app = "main:app"
+
+# Custom hook to run initialize_app() before starting workers
+def on_starting(server):
+    initialize_app()
